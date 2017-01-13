@@ -17,7 +17,7 @@ namespace parking_service
             config.Filters.Add(new CustomExceptionFilterAttribute());
             config.MapHttpAttributeRoutes();
             config.MessageHandlers.Add(new CheckRequest());
-
+            
 
             config.Routes.MapHttpRoute(
                      name: "DefaultApi",
@@ -27,6 +27,8 @@ namespace parking_service
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
             app.UseWebApi(config);
+            
+            
         }
     }
  
