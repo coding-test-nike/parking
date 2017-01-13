@@ -15,18 +15,14 @@ namespace parking_service
             config.EnableCors();
             config.MapHttpAttributeRoutes();
 
-            //for regular non-mobile app controllers
+ 
             config.Routes.MapHttpRoute(
                      name: "DefaultApi",
                      routeTemplate: "api/{controller}/{id}",
                      defaults: new { id = RouteParameter.Optional });
 
 
-            new MobileAppConfiguration()
-                .UseDefaultConfiguration()
-                .ApplyTo(config);
-
-  
+ 
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
  
