@@ -1,8 +1,9 @@
 ﻿using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
-using Microsoft.Azure.Mobile.Server.Config;
 
 using Owin;
+using parking_service.Framework;
+using System.Web.Http.ExceptionHandling;
 
 namespace parking_service
 {
@@ -13,19 +14,17 @@ namespace parking_service
             HttpConfiguration config = new HttpConfiguration();
 
             config.EnableCors();
+            config.Filters.Add(new CustomExceptionFilterAttribute());
             config.MapHttpAttributeRoutes();
+            config.MessageHandlers.Add(new CheckRequest());
 
- 
+
             config.Routes.MapHttpRoute(
                      name: "DefaultApi",
                      routeTemplate: "api/{controller}/{id}",
                      defaults: new { id = RouteParameter.Optional });
-
-
  
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
-
- 
 
             app.UseWebApi(config);
         }
